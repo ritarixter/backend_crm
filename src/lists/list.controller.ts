@@ -23,7 +23,7 @@ export class ListController {
   @UseGuards(JwtGuard)
   @Get()
   findAll(@Req() req: { user: User }): Promise<List[]> {
-    if (req.user.access === 'Главный инженер') {
+    if (req.user.access === 'Главный инженер' || req.user.access === 'Закупщик') {
       return this.listService.find({
         relations: {
           company: true,
@@ -119,7 +119,7 @@ export class ListController {
       });
     }
 
-    if (req.user.access === 'Инженер') {
+    if (req.user.access === 'Инженер' || req.user.access === 'Закупщик') {
       return this.listService.findOne({
         where: { id },
         relations: {
