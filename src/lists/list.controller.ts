@@ -32,7 +32,7 @@ export class ListController {
           works: true,
         },
         order: {
-          createdAt: 'ASC',
+          createdAt: 'DESC',
           //endDate: "ASC"
         },
       });
