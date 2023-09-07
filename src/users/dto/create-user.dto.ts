@@ -25,6 +25,9 @@ export class CreateUserDto {
   @IsOptional()
   avatar?: string;
 
+  @IsOptional()
+  phone?: string;
+
   @IsNotEmpty()
   @IsString()
   @Length(2, 15)
