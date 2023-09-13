@@ -11,7 +11,7 @@ async function bootstrap() {
   app.use(helmet());
   app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
   app.enableCors({
-    origin: [process.env.URL_FRONTEND],
+    origin: ['http://localhost:3000'],
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT'],
     credentials: true,
   });

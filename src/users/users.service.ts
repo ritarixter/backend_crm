@@ -33,6 +33,7 @@ export class UserService {
     });
     if (updateUserDto.name) user.name = updateUserDto.name;
     if (updateUserDto.username) user.username = updateUserDto.username;
+    if (updateUserDto.phone) user.phone = updateUserDto.phone;
     if (updateUserDto.password) {
       const salt = await bcrypt.genSalt();
       const password = await bcrypt.hash(updateUserDto.password, salt);

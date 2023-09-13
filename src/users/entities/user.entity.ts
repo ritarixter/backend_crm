@@ -40,6 +40,11 @@ export class User {
   @IsOptional()
   @IsString()
   @Column({ default: '' })
+  phone: string; //ФИО
+
+  @IsOptional()
+  @IsString()
+  @Column({ default: '' })
   avatar?: string;
 
   @IsNotEmpty()
