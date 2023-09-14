@@ -30,6 +30,7 @@ export class ListController {
           commercialProposal: true,
           users: true,
           works: true,
+          step:true,
         },
         order: {
           createdAt: 'DESC',
@@ -58,9 +59,10 @@ export class ListController {
         },
         relations: {
           company: true,
+          step:true,
         },
         order: {
-          createdAt: 'ASC',
+          createdAt: 'DESC',
           //endDate: "ASC"
         },
       });
@@ -72,9 +74,10 @@ export class ListController {
           commercialProposal: true,
           users: true,
           works: true,
+          step:true,
         },
         order: {
-          createdAt: 'ASC',
+          createdAt: 'DESC',
           //endDate: "ASC"
         },
       });
@@ -104,6 +107,7 @@ export class ListController {
         },
         relations: {
           company: true,
+          step:true,
         },
       });
     }
@@ -115,6 +119,7 @@ export class ListController {
           company: true,
           commercialProposal: true,
           users: true,
+          step:true,
         },
       });
     }
@@ -125,6 +130,7 @@ export class ListController {
         relations: {
           company: true,
           commercialProposal: true,
+          step:true,
         },
       });
     }
