@@ -14,6 +14,7 @@ import { ProductModule } from './product/product.module';
 import { TasksModule } from './tasks/tasks.module';
 import { MediaModule } from './media/media.module';
 import { StockModule } from './stock/stock.module';
+import { StepModule } from './step/step.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { StockModule } from './stock/stock.module';
     TasksModule,
     MediaModule,
     StockModule,
+    StepModule
   ],
   controllers: [AppController],
   providers: [AppService],

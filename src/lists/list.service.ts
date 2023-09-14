@@ -11,6 +11,7 @@ import { UpdateListDto } from './dto/update-list.dto';
 import { CompanyService } from 'src/company/company.service';
 import { UserService } from 'src/users/users.service';
 import { WorkService } from 'src/work/work.service';
+import { StepService } from 'src/step/step.service';
 
 @Injectable()
 export class ListService {
@@ -19,6 +20,7 @@ export class ListService {
     private readonly companyService: CompanyService,
     private readonly userService: UserService,
     private readonly worksService: WorkService,
+    private readonly stepService:StepService,
   ) {}
 
   async update(id: number, updateListDto: UpdateListDto) {
@@ -84,7 +86,7 @@ export class ListService {
 
   async create(createListDto: CreateListDto, access: string): Promise<List> {
     if (access != 'Менеджер') {
-      throw new ForbiddenException('Вы не можете удалять заявки');
+      throw new ForbiddenException('Вы не можете создавать заявки');
     } else {
       const company = await this.companyService.findOne({
         where: { INN: createListDto.INNCompany },
@@ -92,9 +94,11 @@ export class ListService {
       if (!company) {
         throw new NotFoundException('Компания не найдена');
       }
+      const step = await this.stepService.create()
       return this.listRepository.save({
         ...createListDto,
         company: { id: company.id },
+        step: step
       });
     }
   }

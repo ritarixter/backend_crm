@@ -2,6 +2,7 @@ import { IsNotEmpty, IsOptional, IsString, Length } from 'class-validator';
 import { CommercialProposal } from 'src/commercial-proposal/entities/commercial-proposal.entity';
 import { Company } from 'src/company/entities/company.entity';
 import { IMediaResponse } from 'src/media/media.interface';
+import { Step } from 'src/step/entities/step.entity';
 import { User } from 'src/users/entities/user.entity';
 import { Work } from 'src/work/entities/work.entity';
 import {
@@ -65,6 +66,10 @@ export class List {
   @JoinColumn({ name: 'commercial_proposal_Id' })
   commercialProposal: CommercialProposal;
 
+  @OneToOne(() => Step, (step) => step.list)
+  @JoinColumn({ name: 'step_Id' })
+  step: Step;
+
   @IsOptional()
   @IsString()
   @Length(2, 20)
@@ -78,5 +83,5 @@ export class List {
   importance: string; //Обзятельно!
 
   @Column('jsonb', { nullable: true })
-  files: object[]
+  files: object[];
 }
