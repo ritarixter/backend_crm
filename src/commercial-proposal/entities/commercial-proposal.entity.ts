@@ -37,4 +37,13 @@ export class CommercialProposal {
   @OneToOne(() => List, (list) => list.commercialProposal)
   list: List;
 
+  @Column({nullable: true})
+  summa: string;
+
+  @Column({nullable: true})
+  marginality: string;
+
+  @Column('jsonb', {nullable: true})
+  variablesForMarginality: Array<object>;
+
 }
