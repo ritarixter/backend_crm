@@ -96,6 +96,7 @@ export class ListController {
           description: true,
           customer: true,
           files: true,
+          address: true,
           company: {
             id: true,
             INN: true,
@@ -129,6 +130,7 @@ export class ListController {
         where: { id },
         relations: {
           company: true,
+          users: true,
           commercialProposal: true,
           step:true,
         },

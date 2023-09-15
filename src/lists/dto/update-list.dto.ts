@@ -14,6 +14,12 @@ export class UpdateListDto {
   @IsOptional()
   @IsNotEmpty()
   @IsString()
+  @Length(2, 60)
+  address?: string;
+
+  @IsOptional()
+  @IsNotEmpty()
+  @IsString()
   @Length(2, 20)
   endDate: Date;
 

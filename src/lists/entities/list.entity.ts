@@ -31,9 +31,15 @@ export class List {
 
   @IsNotEmpty()
   @IsString()
-  @Length(2, 30)
-  @Column()
+  @Length(2, 60)
+  @Column({default: ""})
   name: string;
+
+  @IsNotEmpty()
+  @IsString()
+  @Length(2, 30)
+  @Column({default: ""})
+  address: string;
 
   @ManyToOne(() => Company, (company) => company.lists)
   company: Company;
