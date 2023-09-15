@@ -37,7 +37,7 @@ export class ListService {
     if (updateListDto.importance) list.importance = updateListDto.importance;
     if (updateListDto.status) list.status = updateListDto.status;
     if (updateListDto.address) list.address = updateListDto.address;
-    if (updateListDto.files) list.files = updateListDto.files;
+    if (updateListDto.files) list.files = list.files.concat(updateListDto.files);
     if (updateListDto.idCompany) {
       const company = await this.companyService.findOne({
         where: { id: updateListDto.idCompany },

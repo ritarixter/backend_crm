@@ -14,7 +14,7 @@ export class UpdateListDto {
   @IsOptional()
   @IsNotEmpty()
   @IsString()
-  @Length(2, 60)
+  @Length(2, 120)
   address?: string;
 
   @IsOptional()

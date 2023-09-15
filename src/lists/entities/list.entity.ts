@@ -37,7 +37,7 @@ export class List {
 
   @IsNotEmpty()
   @IsString()
-  @Length(2, 30)
+  @Length(2, 120)
   @Column({default: ""})
   address: string;
 
@@ -57,7 +57,7 @@ export class List {
 
   @IsOptional()
   @IsString()
-  @Length(2, 30)
+  @Length(2, 200)
   @Column({ nullable: true })
   description?: string;
 
