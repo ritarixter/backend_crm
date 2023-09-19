@@ -11,6 +11,7 @@ import { UpdateListDto } from './dto/update-list.dto';
 import { CompanyService } from 'src/company/company.service';
 import { UserService } from 'src/users/users.service';
 import { WorkService } from 'src/work/work.service';
+import { StepService } from 'src/step/step.service';
 
 @Injectable()
 export class ListService {
@@ -19,14 +20,15 @@ export class ListService {
     private readonly companyService: CompanyService,
     private readonly userService: UserService,
     private readonly worksService: WorkService,
+    private readonly stepService: StepService,
   ) {}
 
   async update(id: number, updateListDto: UpdateListDto) {
     const list = await this.findOne({
       where: { id },
       relations: {
-        users:true
-      }
+        users: true,
+      },
     });
     if (updateListDto.name) list.name = updateListDto.name;
     if (updateListDto.description) list.description = updateListDto.description;
@@ -34,7 +36,8 @@ export class ListService {
     if (updateListDto.customer) list.customer = updateListDto.customer;
     if (updateListDto.importance) list.importance = updateListDto.importance;
     if (updateListDto.status) list.status = updateListDto.status;
-    if (updateListDto.files) list.files = updateListDto.files;
+    if (updateListDto.address) list.address = updateListDto.address;
+    if (updateListDto.files) list.files = list.files.concat(updateListDto.files);
     if (updateListDto.idCompany) {
       const company = await this.companyService.findOne({
         where: { id: updateListDto.idCompany },
@@ -48,15 +51,31 @@ export class ListService {
     if (updateListDto.commercialProposal) {
       list.commercialProposal = updateListDto.commercialProposal;
     }
+
     if (updateListDto.users) {
       const users = await this.userService.findBy({
         id: In(updateListDto.users),
       });
+
       if (users) {
-    /*     users.forEach((user)=>{
-          list.users.push(user)
-        }) */
-        list.users = list.users.concat(users)
+        console.log(users)
+        const engineer = users.filter((user) => user.access === 'Инженер');
+        const fitters = users.filter((user) => user.access === 'Монтажник');
+
+        if (engineer.length != 0) {
+          if (list.users.some((user) => user.access === 'Инженер')) {
+            const notEngineer = users.filter(
+              (user) => user.access != 'Инженер',
+            );
+            list.users = notEngineer;
+            list.users = list.users.concat(engineer);
+          } else {
+            list.users = engineer;
+          }
+        }
+        if (fitters.length != 0) {
+          list.users = list.users.concat(fitters);
+        }
       }
     }
     if (updateListDto.works) {
@@ -84,7 +103,7 @@ export class ListService {
 
   async create(createListDto: CreateListDto, access: string): Promise<List> {
     if (access != 'Менеджер') {
-      throw new ForbiddenException('Вы не можете удалять заявки');
+      throw new ForbiddenException('Вы не можете создавать заявки');
     } else {
       const company = await this.companyService.findOne({
         where: { INN: createListDto.INNCompany },
@@ -92,9 +111,11 @@ export class ListService {
       if (!company) {
         throw new NotFoundException('Компания не найдена');
       }
+      const step = await this.stepService.create();
       return this.listRepository.save({
         ...createListDto,
         company: { id: company.id },
+        step: step,
       });
     }
   }

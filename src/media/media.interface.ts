@@ -1,4 +1,5 @@
 export interface IMediaResponse {
   url: string;
-  name: string
+  name: string;
+  access: string
 }

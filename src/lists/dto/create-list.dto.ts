@@ -3,8 +3,8 @@ import { IsNotEmpty, IsOptional, IsString, Length } from 'class-validator';
 export class CreateListDto {
   @IsNotEmpty()
   @IsString()
-  @Length(2, 30)
-  name: string;
+  @Length(2, 120)
+  address: string;
 
   @IsNotEmpty()
   @IsString()

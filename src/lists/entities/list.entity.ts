@@ -2,6 +2,7 @@ import { IsNotEmpty, IsOptional, IsString, Length } from 'class-validator';
 import { CommercialProposal } from 'src/commercial-proposal/entities/commercial-proposal.entity';
 import { Company } from 'src/company/entities/company.entity';
 import { IMediaResponse } from 'src/media/media.interface';
+import { Step } from 'src/step/entities/step.entity';
 import { User } from 'src/users/entities/user.entity';
 import { Work } from 'src/work/entities/work.entity';
 import {
@@ -30,9 +31,15 @@ export class List {
 
   @IsNotEmpty()
   @IsString()
-  @Length(2, 30)
-  @Column()
+  @Length(2, 60)
+  @Column({default: ""})
   name: string;
+
+  @IsNotEmpty()
+  @IsString()
+  @Length(2, 120)
+  @Column({default: ""})
+  address: string;
 
   @ManyToOne(() => Company, (company) => company.lists)
   company: Company;
@@ -50,7 +57,7 @@ export class List {
 
   @IsOptional()
   @IsString()
-  @Length(2, 30)
+  @Length(2, 200)
   @Column({ nullable: true })
   description?: string;
 
@@ -65,6 +72,10 @@ export class List {
   @JoinColumn({ name: 'commercial_proposal_Id' })
   commercialProposal: CommercialProposal;
 
+  @OneToOne(() => Step, (step) => step.list)
+  @JoinColumn({ name: 'step_Id' })
+  step: Step;
+
   @IsOptional()
   @IsString()
   @Length(2, 20)
@@ -78,5 +89,5 @@ export class List {
   importance: string; //Обзятельно!
 
   @Column('jsonb', { nullable: true })
-  files: object[]
+  files: object[];
 }

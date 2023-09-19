@@ -8,4 +8,10 @@ export class UpdateCommercialProposalDto {
     @IsString()
     @Length(2, 30)
     name?: string;
+
+    variablesForMarginality: object[];
+
+    summa: string;
+
+    marginality: string;
 }

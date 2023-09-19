@@ -8,6 +8,7 @@ export class MediaService {
   async saveMedia(
     files: Array<Express.Multer.File>,
     folder = 'files',
+    access:string
   ): Promise<Array<IMediaResponse>> {
     if(files.length > 0){
     const uploadFolder = `${path}/uploads/${folder}`;
@@ -21,6 +22,7 @@ export class MediaService {
       result.push({
         url: `/uploads/${folder}/${file.originalname}`,
         name: file.originalname,
+        access: access
       });
     });
     return result;
