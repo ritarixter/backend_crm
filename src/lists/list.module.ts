@@ -6,9 +6,10 @@ import { ListController } from './list.controller';
 import { CompanyModule } from 'src/company/company.module';
 import { UsersModule } from 'src/users/users.module';
 import { WorkModule } from 'src/work/work.module';
+import { StepModule } from 'src/step/step.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([List]), CompanyModule, UsersModule, WorkModule],
+  imports: [TypeOrmModule.forFeature([List]), CompanyModule, UsersModule, WorkModule, StepModule],
   providers: [ListService],
   controllers: [ListController],
   exports: [ListService]
