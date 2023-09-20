@@ -129,7 +129,7 @@ export class ListService {
 
   async removeFile(id: number, filePath: string, accessCurrentUser: string, accessFile:string) {
     if (accessCurrentUser != accessFile) {
-      throw new ForbiddenException('Вы не можете чужие файлы');
+      throw new ForbiddenException('Вы не можете удалять чужие файлы');
     }
     const list = await this.findOne({
       where: { id },
@@ -138,6 +138,6 @@ export class ListService {
       (file: { url: string }) => file.url != filePath,
     );
 
-    this.listRepository.save({ ...list, files: withoutFile });
+    return this.listRepository.save({ ...list, files: withoutFile });
   }
 }
