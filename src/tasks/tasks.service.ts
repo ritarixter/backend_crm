@@ -17,11 +17,11 @@ export class TasksService {
   find(query: FindManyOptions<Task>) {
     return this.taskRepository.find(query);
   }
-  
+
   async findOne(query: FindOneOptions<Task>) {
     return this.taskRepository.findOne(query);
   }
-  
+
   // async findByDate(date: Date): Promise<Task> {
   //   let startDate = new Date(date);
   //   let lastDate = new Date(date);
@@ -51,7 +51,7 @@ export class TasksService {
     if (task.user.id != userId) {
       throw new ForbiddenException('Вы не можете изменять чужие задачи!');
     }
-    return this.taskRepository.save({...task, ...updateTaskDto });
+    return this.taskRepository.save({ ...task, ...updateTaskDto });
   }
 
   async remove(id: number, userId: number) {
@@ -67,7 +67,7 @@ export class TasksService {
     }
 
     if (!task) throw new NotFoundException('Такой задачи не существует!');
-   
+
     return await this.taskRepository.delete(id);
   }
 }
