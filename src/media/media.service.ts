@@ -16,14 +16,11 @@ export class MediaService {
       await ensureDir(uploadFolder);
 
       files.forEach((file) => {
-        writeFile(
-          `${uploadFolder}/${file.originalname}`,
-          file.buffer,
-        );
+        writeFile(`${uploadFolder}/${file.originalname}`, file.buffer);
       });
       const result = [];
       files.forEach((file) => {
-        console.log(file.originalname)
+        console.log(file.originalname);
         result.push({
           url: `/uploads/${folder}/${file.originalname}`,
           name: file.originalname,
@@ -36,14 +33,12 @@ export class MediaService {
     }
   }
 
-  deleteFile(filePath: string): void {
-    console.log(`${path}${filePath}`)
+  deleteFile(filePath: string): boolean {
     fs.unlink(`${path}${filePath}`, (err) => {
       if (err) {
-        console.error(err);
-        return 'Ошибка';
+        throw new NotFoundException('Файл не найден');
       }
-      return 'Файл успешно удален';
     });
+    return true;
   }
 }

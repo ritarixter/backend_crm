@@ -15,6 +15,7 @@ import { CreateListDto } from './dto/create-list.dto';
 import { UpdateListDto } from './dto/update-list.dto';
 import { JwtGuard } from 'src/auth/guard/jwt.guard';
 import { User } from 'src/users/entities/user.entity';
+import { DeleteFileDto } from './dto/delete-file.dto';
 
 @Controller('list')
 export class ListController {
@@ -178,8 +179,9 @@ export class ListController {
 
   @UseGuards(JwtGuard)
   @Delete(':id/upload')
-  removeFile(@Param('id') id: string, @Body() file: {filePath: string, access: string}, @Req() req: { user: User }) {
-    return this.listService.removeFile(+id, file.filePath, req.user.access, file.access);
+  removeFile(@Param('id') id: string, @Body() deleteFileDto: DeleteFileDto, @Req() req: { user: User }) {
+
+    return this.listService.removeFile(+id, deleteFileDto.filePath, req.user.access, deleteFileDto.access);
   }
 
 
