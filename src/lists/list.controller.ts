@@ -168,6 +168,13 @@ export class ListController {
   }
 
   @UseGuards(JwtGuard)
+  @Delete(':id/upload')
+  removeFile(@Param('id') id: string, @Body() file: {filePath: string, access: string}, @Req() req: { user: User }) {
+    return this.listService.removeFile(+id, file.filePath, req.user.access, file.access);
+  }
+
+
+  @UseGuards(JwtGuard)
   @Patch(':id')
   update(@Param('id') id: number, @Body() updateListDto: UpdateListDto) {
     return this.listService.update(id, updateListDto);

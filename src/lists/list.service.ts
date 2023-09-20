@@ -37,7 +37,8 @@ export class ListService {
     if (updateListDto.importance) list.importance = updateListDto.importance;
     if (updateListDto.status) list.status = updateListDto.status;
     if (updateListDto.address) list.address = updateListDto.address;
-    if (updateListDto.files) list.files = list.files.concat(updateListDto.files);
+    if (updateListDto.files)
+      list.files = list.files.concat(updateListDto.files);
     if (updateListDto.idCompany) {
       const company = await this.companyService.findOne({
         where: { id: updateListDto.idCompany },
@@ -58,7 +59,7 @@ export class ListService {
       });
 
       if (users) {
-        console.log(users)
+        console.log(users);
         const engineer = users.filter((user) => user.access === 'Инженер');
         const fitters = users.filter((user) => user.access === 'Монтажник');
 
@@ -125,5 +126,19 @@ export class ListService {
       throw new ForbiddenException('Вы не можете удалять заявки');
     }
     return this.listRepository.delete(id);
+  }
+
+  async removeFile(id: number, filePath: string, accessCurrentUser: string, accessFile:string) {
+    if (accessCurrentUser != accessFile) {
+      throw new ForbiddenException('Вы не можете чужие файлы');
+    }
+    const list = await this.findOne({
+      where: { id },
+    });
+    const withoutFile = list.files.filter(
+      (file: { url: string }) => file.url != filePath,
+    );
+
+    this.listRepository.save({ ...list, files: withoutFile });
   }
 }

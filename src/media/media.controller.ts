@@ -1,5 +1,8 @@
 import {
+  Body,
   Controller,
+  Delete,
+  Param,
   Post,
   Query,
   Req,
@@ -27,4 +30,13 @@ export class MediaController {
   ) {
     return this.mediaService.saveMedia(files, folder, req.user.access);
   }
+
+  
+  @Delete()
+  @UseGuards(JwtGuard)
+  remove(@Body('filePath') filePath: string) {
+    return this.mediaService.deleteFile(filePath);
+  }
 }
+
+
