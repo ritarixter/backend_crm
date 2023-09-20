@@ -1,6 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindManyOptions, FindOneOptions, FindOptionsWhere, Repository } from 'typeorm';
+import {
+  FindManyOptions,
+  FindOneOptions,
+  FindOptionsWhere,
+  Repository,
+} from 'typeorm';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import * as bcrypt from 'bcrypt';
@@ -55,7 +60,7 @@ export class UserService {
   }
 
   findBy(query: FindOptionsWhere<User> | FindOptionsWhere<User>[]) {
-    return this.userRepository.findBy(query)
+    return this.userRepository.findBy(query);
   }
 
   async remove(id: number) {

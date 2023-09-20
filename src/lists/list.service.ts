@@ -59,7 +59,6 @@ export class ListService {
       });
 
       if (users) {
-        console.log(users);
         const engineer = users.filter((user) => user.access === 'Инженер');
         const fitters = users.filter((user) => user.access === 'Монтажник');
 

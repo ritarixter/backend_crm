@@ -23,14 +23,19 @@ export class ListController {
   @UseGuards(JwtGuard)
   @Get()
   findAll(@Req() req: { user: User }): Promise<List[]> {
-    if (req.user.access === 'Главный инженер' || req.user.access === 'Закупщик' || req.user.access === 'Зам директора') {
+    if (
+      req.user.access === 'Главный инженер' ||
+      req.user.access === 'Закупщик' ||
+      req.user.access === 'Зам директора' ||
+      req.user.access === 'Юрист'
+    ) {
       return this.listService.find({
         relations: {
           company: true,
           commercialProposal: true,
           users: true,
           works: true,
-          step:true,
+          step: true,
         },
         order: {
           createdAt: 'DESC',
@@ -46,8 +51,8 @@ export class ListController {
           description: true,
           customer: true,
           files: true,
- 
-          createdAt:true,
+
+          createdAt: true,
           company: {
             id: true,
             INN: true,
@@ -59,7 +64,7 @@ export class ListController {
         },
         relations: {
           company: true,
-          step:true,
+          step: true,
         },
         order: {
           createdAt: 'DESC',
@@ -74,7 +79,7 @@ export class ListController {
           commercialProposal: true,
           users: true,
           works: true,
-          step:true,
+          step: true,
         },
         order: {
           createdAt: 'DESC',
@@ -108,31 +113,35 @@ export class ListController {
         },
         relations: {
           company: true,
-          step:true,
+          step: true,
         },
       });
     }
 
-    if (req.user.access === 'Главный инженер') {
+    if (req.user.access === 'Главный инженер' || req.user.access === 'Юрист') {
       return this.listService.findOne({
         where: { id },
         relations: {
           company: true,
           commercialProposal: true,
           users: true,
-          step:true,
+          step: true,
         },
       });
     }
 
-    if (req.user.access === 'Инженер' || req.user.access === 'Закупщик' || req.user.access === 'Зам директора' || req.user.access === 'Юрист') {
+    if (
+      req.user.access === 'Инженер' ||
+      req.user.access === 'Закупщик' ||
+      req.user.access === 'Зам директора'
+    ) {
       return this.listService.findOne({
         where: { id },
         relations: {
           company: true,
           users: true,
           commercialProposal: true,
-          step:true,
+          step: true,
         },
       });
     }
