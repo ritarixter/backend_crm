@@ -20,7 +20,6 @@ export class MediaService {
       });
       const result = [];
       files.forEach((file) => {
-        console.log(file.originalname);
         result.push({
           url: `/uploads/${folder}/${file.originalname}`,
           name: file.originalname,

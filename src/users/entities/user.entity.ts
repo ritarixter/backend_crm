@@ -9,6 +9,7 @@ import { CommercialProposal } from 'src/commercial-proposal/entities/commercial-
 import { List } from 'src/lists/entities/list.entity';
 import { Plan } from 'src/plan/entities/plan.entity';
 import { Task } from 'src/tasks/entities/task.entity';
+import { Comment } from 'src/comment/entities/comment.entity';
 import {
   CreateDateColumn,
   Entity,
@@ -79,4 +80,7 @@ export class User {
 
   @ManyToMany(() => List, () => List)
   list: List[];
+
+  @OneToMany(() => Comment, (comment) => comment.list)
+  comments?: Comment[];
 }

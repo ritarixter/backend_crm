@@ -31,7 +31,6 @@ export class ListService {
       },
     });
     if (updateListDto.name) list.name = updateListDto.name;
-    if (updateListDto.description) list.description = updateListDto.description;
     if (updateListDto.endDate) list.endDate = updateListDto.endDate;
     if (updateListDto.customer) list.customer = updateListDto.customer;
     if (updateListDto.importance) list.importance = updateListDto.importance;

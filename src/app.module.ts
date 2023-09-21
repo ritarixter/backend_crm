@@ -10,11 +10,11 @@ import { PlanModule } from './plan/plan.module';
 import { CompanyModule } from './company/company.module';
 import { CommercialProposalModule } from './commercial-proposal/commercial-proposal.module';
 import { AuthModule } from './auth/auth.module';
-import { ProductModule } from './product/product.module';
 import { TasksModule } from './tasks/tasks.module';
 import { MediaModule } from './media/media.module';
 import { StockModule } from './stock/stock.module';
 import { StepModule } from './step/step.module';
+import { CommentModule } from './comment/comment.module';
 
 @Module({
   imports: [
@@ -37,11 +37,11 @@ import { StepModule } from './step/step.module';
     CompanyModule,
     CommercialProposalModule,
     AuthModule,
-    ProductModule,
     TasksModule,
     MediaModule,
     StockModule,
-    StepModule
+    StepModule,
+    CommentModule
   ],
   controllers: [AppController],
   providers: [AppService],
