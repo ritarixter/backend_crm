@@ -1,10 +1,10 @@
 import { IsNotEmpty, IsOptional, IsString, Length } from 'class-validator';
 import { CommercialProposal } from 'src/commercial-proposal/entities/commercial-proposal.entity';
 import { Company } from 'src/company/entities/company.entity';
-import { IMediaResponse } from 'src/media/media.interface';
 import { Step } from 'src/step/entities/step.entity';
 import { User } from 'src/users/entities/user.entity';
 import { Work } from 'src/work/entities/work.entity';
+import { Comment } from 'src/comment/entities/comment.entity';
 import {
   CreateDateColumn,
   Entity,
@@ -16,6 +16,7 @@ import {
   ManyToMany,
   OneToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -55,11 +56,11 @@ export class List {
   @JoinTable({ name: 'list_users' })
   users: User[];
 
-  @IsOptional()
-  @IsString()
-  @Length(2, 200)
-  @Column({ nullable: true })
-  description?: string;
+  // @IsOptional()
+  // @IsString()
+  // @Length(2, 200)
+  // @Column({ nullable: true })
+  // description?: string;
 
   @IsOptional()
   @Column({ type: 'timestamptz', nullable: true })
@@ -88,6 +89,10 @@ export class List {
   @Column({ nullable: true })
   importance: string; //Обзятельно!
 
-  @Column('jsonb', { nullable: true })
+  @Column('jsonb', { default: [] })
   files: object[];
+
+  @OneToMany(() => Comment, (comment) => comment.list)
+  comments?: Comment[];
+
 }

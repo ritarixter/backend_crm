@@ -33,10 +33,12 @@ export class ListController {
           users: true,
           works: true,
           step: true,
+          comments: { user: true },
         },
         order: {
           createdAt: 'DESC',
           //endDate: "ASC"
+          comments: { createdAt: 'DESC' },
         },
       });
     } else if (req.user.access === 'Менеджер') {
@@ -44,10 +46,8 @@ export class ListController {
         select: {
           id: true,
           name: true,
-          description: true,
           customer: true,
           files: true,
-
           createdAt: true,
           company: {
             id: true,
@@ -57,14 +57,17 @@ export class ListController {
             nameCompany: true,
             numberPhone: true,
           },
+          comments: true,
         },
         relations: {
           company: true,
           step: true,
+          comments: { user: true },
         },
         order: {
           createdAt: 'DESC',
           //endDate: "ASC"
+          comments: { createdAt: 'DESC' },
         },
       });
     } else {
@@ -75,10 +78,12 @@ export class ListController {
           users: true,
           works: true,
           step: true,
+          comments: { user: true },
         },
         order: {
           createdAt: 'DESC',
           //endDate: "ASC"
+          comments: { createdAt: 'DESC' },
         },
       });
     }
@@ -93,7 +98,6 @@ export class ListController {
         select: {
           id: true,
           name: true,
-          description: true,
           customer: true,
           files: true,
           address: true,
@@ -105,10 +109,15 @@ export class ListController {
             nameCompany: true,
             numberPhone: true,
           },
+          comments: true,
         },
         relations: {
           company: true,
           step: true,
+          comments: { user: true },
+        },
+        order: {
+          comments: { createdAt: 'DESC' },
         },
       });
     } else {
@@ -119,6 +128,10 @@ export class ListController {
           commercialProposal: true,
           users: true,
           step: true,
+          comments: { user: true },
+        },
+        order: {
+          comments: { createdAt: 'DESC' },
         },
       });
     }
