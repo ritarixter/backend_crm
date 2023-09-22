@@ -10,7 +10,7 @@ export class Step {
   createList_step1:boolean;
     
   @Column({default:false})
-  chooseEngineer_step2:boolean; //Выбор инженера и обследование
+  chooseEngineer_step2:boolean; //Выбор инженера и обследование c проектировщиком
 
   @Column({default:false})
   createCP_step3:boolean; //Создание КП 
@@ -37,7 +37,7 @@ export class Step {
 
   //Работа монтажников
   @Column({default:false})
-  workFitter_step9:boolean; //заключение и подписание договора
+  workFitter_step9:boolean; //Кто подтверждает, что работа монтажников закончилась? ЕДИНСТВЕННЫЙ НЕ СДЕЛАННЫЙ СТЕП!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
   //Когда монтажники закончили работу отправляется уведомление Аксиньи
   @Column({default:false})
