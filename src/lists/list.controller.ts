@@ -118,7 +118,11 @@ export class ListController {
       });
     }
 
-    if (req.user.access === 'Главный инженер' || req.user.access === 'Юрист') {
+    if (
+      req.user.access === 'Главный инженер' ||
+      req.user.access === 'Зам директора' ||
+      req.user.access === 'Юрист'
+    ) {
       return this.listService.findOne({
         where: { id },
         relations: {
