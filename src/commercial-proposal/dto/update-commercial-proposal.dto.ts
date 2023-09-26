@@ -11,7 +11,7 @@ export class UpdateCommercialProposalDto {
 
     variablesForMarginality: object[];
 
-    summa: string;
-
+    summaSale: string;
+    summaBuy: string;
     marginality: string;
 }

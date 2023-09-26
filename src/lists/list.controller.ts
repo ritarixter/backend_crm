@@ -15,6 +15,7 @@ import { CreateListDto } from './dto/create-list.dto';
 import { UpdateListDto } from './dto/update-list.dto';
 import { JwtGuard } from 'src/auth/guard/jwt.guard';
 import { User } from 'src/users/entities/user.entity';
+import { DeleteFileDto } from './dto/delete-file.dto';
 
 @Controller('list')
 export class ListController {
@@ -23,35 +24,30 @@ export class ListController {
   @UseGuards(JwtGuard)
   @Get()
   findAll(@Req() req: { user: User }): Promise<List[]> {
-    if (
-      req.user.access === 'Главный инженер' ||
-      req.user.access === 'Закупщик' ||
-      req.user.access === 'Зам директора' ||
-      req.user.access === 'Юрист'
-    ) {
+    if (req.user.access === 'Инженер') {
       return this.listService.find({
+        where: { users: { id: req.user.id } },
         relations: {
           company: true,
           commercialProposal: true,
           users: true,
           works: true,
           step: true,
+          comments: { user: true },
         },
         order: {
           createdAt: 'DESC',
           //endDate: "ASC"
+          comments: { createdAt: 'DESC' },
         },
       });
     } else if (req.user.access === 'Менеджер') {
-      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!ХЗ
       return this.listService.find({
         select: {
           id: true,
           name: true,
-          description: true,
           customer: true,
           files: true,
-
           createdAt: true,
           company: {
             id: true,
@@ -61,29 +57,33 @@ export class ListController {
             nameCompany: true,
             numberPhone: true,
           },
+          comments: true,
         },
         relations: {
           company: true,
           step: true,
+          comments: { user: true },
         },
         order: {
           createdAt: 'DESC',
           //endDate: "ASC"
+          comments: { createdAt: 'DESC' },
         },
       });
     } else {
       return this.listService.find({
-        where: { users: { id: req.user.id } },
         relations: {
           company: true,
           commercialProposal: true,
           users: true,
           works: true,
           step: true,
+          comments: { user: true },
         },
         order: {
           createdAt: 'DESC',
           //endDate: "ASC"
+          comments: { createdAt: 'DESC' },
         },
       });
     }
@@ -98,7 +98,6 @@ export class ListController {
         select: {
           id: true,
           name: true,
-          description: true,
           customer: true,
           files: true,
           address: true,
@@ -110,19 +109,18 @@ export class ListController {
             nameCompany: true,
             numberPhone: true,
           },
+          comments: true,
         },
         relations: {
           company: true,
           step: true,
+          comments: { user: true },
+        },
+        order: {
+          comments: { createdAt: 'DESC' },
         },
       });
-    }
-
-    if (
-      req.user.access === 'Главный инженер' ||
-      req.user.access === 'Зам директора' ||
-      req.user.access === 'Юрист'
-    ) {
+    } else {
       return this.listService.findOne({
         where: { id },
         relations: {
@@ -130,22 +128,10 @@ export class ListController {
           commercialProposal: true,
           users: true,
           step: true,
+          comments: { user: true },
         },
-      });
-    }
-
-    if (
-      req.user.access === 'Инженер' ||
-      req.user.access === 'Закупщик' ||
-      req.user.access === 'Зам директора'
-    ) {
-      return this.listService.findOne({
-        where: { id },
-        relations: {
-          company: true,
-          users: true,
-          commercialProposal: true,
-          step: true,
+        order: {
+          comments: { createdAt: 'DESC' },
         },
       });
     }
@@ -178,6 +164,21 @@ export class ListController {
   @Delete(':id')
   remove(@Param('id') id: string, @Req() req: { user: User }) {
     return this.listService.remove(+id, req.user.access);
+  }
+
+  @UseGuards(JwtGuard)
+  @Delete(':id/upload')
+  removeFile(
+    @Param('id') id: string,
+    @Body() deleteFileDto: DeleteFileDto,
+    @Req() req: { user: User },
+  ) {
+    return this.listService.removeFile(
+      +id,
+      deleteFileDto.filePath,
+      req.user.access,
+      deleteFileDto.access,
+    );
   }
 
   @UseGuards(JwtGuard)

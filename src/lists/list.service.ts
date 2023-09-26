@@ -31,7 +31,6 @@ export class ListService {
       },
     });
     if (updateListDto.name) list.name = updateListDto.name;
-    if (updateListDto.description) list.description = updateListDto.description;
     if (updateListDto.endDate) list.endDate = updateListDto.endDate;
     if (updateListDto.customer) list.customer = updateListDto.customer;
     if (updateListDto.importance) list.importance = updateListDto.importance;
@@ -125,5 +124,19 @@ export class ListService {
       throw new ForbiddenException('Вы не можете удалять заявки');
     }
     return this.listRepository.delete(id);
+  }
+
+  async removeFile(id: number, filePath: string, accessCurrentUser: string, accessFile:string) {
+    if (accessCurrentUser != accessFile) {
+      throw new ForbiddenException('Вы не можете удалять чужие файлы');
+    }
+    const list = await this.findOne({
+      where: { id },
+    });
+    const withoutFile = list.files.filter(
+      (file: { url: string }) => file.url != filePath,
+    );
+
+    return this.listRepository.save({ ...list, files: withoutFile });
   }
 }

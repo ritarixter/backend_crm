@@ -38,7 +38,10 @@ export class CommercialProposal {
   list: List;
 
   @Column({nullable: true})
-  summa: string;
+  summaSale: string;
+
+  @Column({nullable: true})
+  summaBuy: string;
 
   @Column({nullable: true})
   marginality: string;
