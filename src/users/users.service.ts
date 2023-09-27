@@ -45,7 +45,7 @@ export class UserService {
       user.password = password;
     }
     if (updateUserDto.access) user.access = updateUserDto.access;
-    if (updateUserDto.avatar) user.avatar = updateUserDto.avatar;
+    //if (updateUserDto.avatar) user.avatar = updateUserDto.avatar;
 
     return this.userRepository.save(user);
   }

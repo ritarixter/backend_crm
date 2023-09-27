@@ -23,10 +23,10 @@ export class CreateUserDto {
   name: string;
 
   @IsOptional()
-  avatar?: string;
+  avatar: string;
 
   @IsOptional()
-  phone?: string;
+  phone: string;
 
   @IsNotEmpty()
   @IsString()

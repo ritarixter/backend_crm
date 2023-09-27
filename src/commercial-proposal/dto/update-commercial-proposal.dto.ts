@@ -13,5 +13,4 @@ export class UpdateCommercialProposalDto {
 
     summaSale: string;
     summaBuy: string;
-    marginality: string;
 }
