@@ -40,13 +40,13 @@ export class User {
 
   @IsOptional()
   @IsString()
-  @Column({ default: '' })
+  @Column()
   phone: string; //ФИО
 
   @IsOptional()
   @IsString()
-  @Column({ default: '' })
-  avatar?: string;
+  @Column()
+  avatar: string;
 
   @IsNotEmpty()
   @IsString()
