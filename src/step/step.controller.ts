@@ -21,7 +21,19 @@ export class StepController {
   @UseGuards(JwtGuard)
   @Get()
   findAll(): Promise<Step[]> {
-    return this.stepService.find();
+    return this.stepService.find({
+      select: {
+        list: {
+          id: true,
+        },
+      },
+      relations: {
+        list: true,
+      },
+      order: {
+        updatedAt: 'DESC',
+      },
+    });
   }
 
   @UseGuards(JwtGuard)

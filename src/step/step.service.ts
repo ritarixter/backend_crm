@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindOneOptions, Repository } from 'typeorm';
+import { FindManyOptions, FindOneOptions, Repository } from 'typeorm';
 import { Step } from './entities/step.entity';
 import { UpdateStepDto } from './dto/update-step.dto';
 
@@ -10,9 +10,10 @@ export class StepService {
     @InjectRepository(Step) private stepRepository: Repository<Step>,
   ) {}
 
-  async find(): Promise<Step[]> {
-    return this.stepRepository.find();
+  find(query: FindManyOptions<Step>) {
+    return this.stepRepository.find(query);
   }
+
 
   async update(id: number, updateStepDto: UpdateStepDto) {
     const step = await this.findOne({
