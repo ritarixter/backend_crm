@@ -21,13 +21,13 @@ export class StepController {
   @UseGuards(JwtGuard)
   @Get()
   findAll(): Promise<Step[]> {
-      return this.stepService.find()
+    return this.stepService.find();
   }
 
   @UseGuards(JwtGuard)
   @Post()
   create(): Promise<Step> {
-      return this.stepService.create()
+    return this.stepService.create();
   }
 
   @UseGuards(JwtGuard)

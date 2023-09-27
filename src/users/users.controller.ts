@@ -41,10 +41,10 @@ export class UserController {
     });
   }
 
-   @Get(':id')
+  @Get(':id')
   findOne(@Param('id') id: number) {
     return this.userService.findOne({
-      where: { id }
+      where: { id },
     });
   }
 
@@ -61,5 +61,5 @@ export class UserController {
   // @Delete(':id')
   // remove(@Param('id') id: number) {
   //   return this.userService.remove(id);
-  // } 
+  // }
 }

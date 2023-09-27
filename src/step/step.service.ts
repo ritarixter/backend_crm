@@ -38,6 +38,11 @@ export class StepService {
     if (updateStepDto.idStep === 5) {
       step.checkCPbySuperEngineer_step5 = true;
     }
+    if (updateStepDto.idStep === 5.1) {
+      step.returnToBuyer_step5_1 = true;
+      step.editCPbyBuyer_step4 = false; //???????????????
+      step.checkCPbySuperEngineer_step5 = false;
+    }
     if (updateStepDto.idStep === 6) {
       step.calcMarginality_step6 = true;
       step.returnCPforSuperEngineer_step7 = false;

@@ -23,14 +23,14 @@ export class TasksController {
 
   @Post()
   @UseGuards(JwtGuard)
-  create(@Body() createTaskDto: CreateTaskDto, @Req() req: {user: User}) {
+  create(@Body() createTaskDto: CreateTaskDto, @Req() req: { user: User }) {
     createTaskDto.user = req.user;
     return this.tasksService.create(createTaskDto);
   }
 
   @UseGuards(JwtGuard)
   @Get()
-  async findTasks(@Req() req: {user: User}) {
+  async findTasks(@Req() req: { user: User }) {
     const tasks = await this.tasksService.find({
       where: { user: { id: req.user.id } },
     });
@@ -42,31 +42,38 @@ export class TasksController {
 
   @UseGuards(JwtGuard)
   @Post('byDate')
-    async getTasksByDate(@Req() req: {user: User}, @Body() { endDate } : { endDate: Date }) {
-      let startDate = new Date(endDate);
-      let lastDate = new Date(endDate);
-      lastDate.setUTCHours(24);
-      const tasks = await this.tasksService.find({
-        where: {
-          user: { id: req.user.id },
-          endDate: Between(startDate, lastDate)
-        },
-      });
+  async getTasksByDate(
+    @Req() req: { user: User },
+    @Body() { endDate }: { endDate: Date },
+  ) {
+    let startDate = new Date(endDate);
+    let lastDate = new Date(endDate);
+    lastDate.setUTCHours(24);
+    const tasks = await this.tasksService.find({
+      where: {
+        user: { id: req.user.id },
+        endDate: Between(startDate, lastDate),
+      },
+    });
     if (!tasks) {
-        throw new NotFoundException();
-      }
-      return tasks;
+      throw new NotFoundException();
+    }
+    return tasks;
   }
 
   @UseGuards(JwtGuard)
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto, @Req() req: {user: User}) {
+  update(
+    @Param('id') id: string,
+    @Body() updateTaskDto: UpdateTaskDto,
+    @Req() req: { user: User },
+  ) {
     return this.tasksService.update(+id, updateTaskDto, req.user.id);
   }
 
   @UseGuards(JwtGuard)
   @Delete(':id')
-  remove(@Param('id') id: string, @Req() req: {user: User}) {
+  remove(@Param('id') id: string, @Req() req: { user: User }) {
     return this.tasksService.remove(+id, req.user.id);
   }
 }
