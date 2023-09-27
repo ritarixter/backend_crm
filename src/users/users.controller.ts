@@ -23,7 +23,11 @@ export class UserController {
   @UseGuards(JwtGuard)
   @Get()
   findAll(): Promise<User[]> {
-    return this.userService.findAll();
+    return this.userService.find({
+      order: {
+        createdAt: 'DESC',
+      },
+    });
   }
 
   //Получение данных об пользователе, который щас авторизован
