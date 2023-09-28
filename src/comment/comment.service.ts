@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindOneOptions, Repository } from 'typeorm';
+import { FindManyOptions, FindOneOptions, Repository } from 'typeorm';
 import { Comment } from './entities/comment.entity';
 import { UpdateCommentDto } from './dto/update-comment.dto';
 import { CreateCommentDto } from './dto/create-comment.dto';
@@ -37,9 +37,10 @@ export class CommentService {
     }
   }
 
-  async findAll(): Promise<Comment[]> {
-    return this.commentRepository.find();
+  find(query: FindManyOptions<Comment>) {
+    return this.commentRepository.find(query);
   }
+
 
   async findOne(query: FindOneOptions<Comment>) {
     return this.commentRepository.findOne(query);
@@ -67,7 +68,7 @@ export class CommentService {
     });
   }
 
-  async remove(id: number, userId: number) {
+  async remove(id: number) {
     // console.log(userId)
     // const comment = await this.findOne({
 

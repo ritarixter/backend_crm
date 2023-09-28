@@ -14,7 +14,6 @@ export class StepService {
     return this.stepRepository.find(query);
   }
 
-
   async update(id: number, updateStepDto: UpdateStepDto) {
     const step = await this.findOne({
       where: { id },
@@ -73,4 +72,9 @@ export class StepService {
   async findOne(query: FindOneOptions<Step>) {
     return this.stepRepository.findOne(query);
   }
+
+  async remove(id: number) {
+    return this.stepRepository.delete(id);
+  }
 }
+

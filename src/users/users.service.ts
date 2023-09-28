@@ -36,6 +36,8 @@ export class UserService {
     const user = await this.findOne({
       where: { id },
     });
+
+    const users = await this.find({});
     if (updateUserDto.name) user.name = updateUserDto.name;
     if (updateUserDto.username) user.username = updateUserDto.username;
     if (updateUserDto.phone) user.phone = updateUserDto.phone;
@@ -45,8 +47,18 @@ export class UserService {
       user.password = password;
     }
     if (updateUserDto.access) user.access = updateUserDto.access;
-    //if (updateUserDto.avatar) user.avatar = updateUserDto.avatar;
 
+    //В Самый низ!!!
+    if (updateUserDto.count > 0) {
+      users.forEach((currUser) => {
+        currUser.count = currUser.count + 1;
+        this.userRepository.save(currUser);
+      });
+
+    }
+    if (updateUserDto.count === 0) {
+      user.count = 0;
+    }
     return this.userRepository.save(user);
   }
 

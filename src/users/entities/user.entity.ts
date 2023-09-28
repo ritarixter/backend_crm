@@ -83,4 +83,7 @@ export class User {
 
   @OneToMany(() => Comment, (comment) => comment.list)
   comments?: Comment[];
+
+  @Column({default:0})
+  count:number
 }

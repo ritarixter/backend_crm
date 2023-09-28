@@ -1,4 +1,4 @@
-import { IsOptional, IsString, Length, MinLength } from 'class-validator';
+import { IsNumber, IsOptional, IsString, Length, MinLength } from 'class-validator';
 
 export class UpdateUserDto {
   @IsOptional()
@@ -28,4 +28,8 @@ export class UpdateUserDto {
   @IsString()
   @Length(2, 15)
   access?: string;
+
+  @IsOptional()
+  @IsNumber()
+  count?:number;
 }

@@ -47,4 +47,10 @@ export class StepController {
   update(@Param('id') id: number, @Body() updateListDto: UpdateStepDto) {
     return this.stepService.update(id, updateListDto);
   }
+
+  @Delete(':id')
+  @UseGuards(JwtGuard)
+  remove(@Param('id') id: string) {
+    return this.stepService.remove(+id);
+  }
 }

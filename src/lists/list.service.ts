@@ -12,6 +12,7 @@ import { CompanyService } from 'src/company/company.service';
 import { UserService } from 'src/users/users.service';
 import { WorkService } from 'src/work/work.service';
 import { StepService } from 'src/step/step.service';
+import { CommentService } from 'src/comment/comment.service';
 
 @Injectable()
 export class ListService {
@@ -21,6 +22,7 @@ export class ListService {
     private readonly userService: UserService,
     private readonly worksService: WorkService,
     private readonly stepService: StepService,
+   // private readonly commentService: CommentService,
   ) {}
 
   async update(id: number, updateListDto: UpdateListDto) {
@@ -119,14 +121,29 @@ export class ListService {
     }
   }
 
-  remove(id: number, access: string) {
+  async remove(id: number, access: string) {
     if (access != 'Менеджер') {
       throw new ForbiddenException('Вы не можете удалять заявки');
     }
+
+    // const comments = await this.commentService.find({
+    //   where: { list: { id: id } },
+    // });
+    // if (comments) {
+    //   comments.forEach((comment) => {
+    //     this.commentService.remove(comment.id);
+    //   });
+    // }
+
     return this.listRepository.delete(id);
   }
 
-  async removeFile(id: number, filePath: string, accessCurrentUser: string, accessFile:string) {
+  async removeFile(
+    id: number,
+    filePath: string,
+    accessCurrentUser: string,
+    accessFile: string,
+  ) {
     if (accessCurrentUser != accessFile) {
       throw new ForbiddenException('Вы не можете удалять чужие файлы');
     }
