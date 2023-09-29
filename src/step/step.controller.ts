@@ -44,8 +44,8 @@ export class StepController {
 
   @UseGuards(JwtGuard)
   @Patch(':id')
-  update(@Param('id') id: number, @Body() updateListDto: UpdateStepDto) {
-    return this.stepService.update(id, updateListDto);
+  update(@Param('id') id: number, @Body() updateStepDto: UpdateStepDto) {
+    return this.stepService.update(id, updateStepDto);
   }
 
   @Delete(':id')

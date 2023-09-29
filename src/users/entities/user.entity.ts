@@ -20,6 +20,7 @@ import {
   JoinTable,
   OneToMany,
 } from 'typeorm';
+import { Notify } from 'src/notify/entities/notify.entity';
 
 @Entity()
 export class User {
@@ -81,9 +82,12 @@ export class User {
   @ManyToMany(() => List, () => List)
   list: List[];
 
+  @ManyToMany(() => Notify, () => Notify)
+  @JoinTable({ name: 'notify_users' })
+  notifications: Notify[];
+
+
   @OneToMany(() => Comment, (comment) => comment.list)
   comments?: Comment[];
 
-  @Column({default:0})
-  count:number
 }

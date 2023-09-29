@@ -29,7 +29,4 @@ export class UpdateUserDto {
   @Length(2, 15)
   access?: string;
 
-  @IsOptional()
-  @IsNumber()
-  count?:number;
 }

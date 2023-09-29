@@ -20,6 +20,7 @@ export class StepService {
     });
     if (updateStepDto.idStep === 1) {
       step.createList_step1 = true;
+      
     }
     if (updateStepDto.idStep === 2) {
       step.chooseEngineer_step2 = true;

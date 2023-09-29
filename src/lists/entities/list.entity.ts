@@ -5,6 +5,7 @@ import { Step } from 'src/step/entities/step.entity';
 import { User } from 'src/users/entities/user.entity';
 import { Work } from 'src/work/entities/work.entity';
 import { Comment } from 'src/comment/entities/comment.entity';
+import { Notify } from 'src/notify/entities/notify.entity';
 import {
   CreateDateColumn,
   Entity,
@@ -18,6 +19,7 @@ import {
   JoinColumn,
   OneToMany,
 } from 'typeorm';
+
 
 @Entity()
 export class List {
@@ -94,5 +96,9 @@ export class List {
 
   @OneToMany(() => Comment, (comment) => comment.list)
   comments?: Comment[];
+
+  @ManyToMany(() => Notify, () => Notify)
+  @JoinTable({ name: 'notify_list' })
+  notifications: Notify[];
 
 }

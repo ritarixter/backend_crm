@@ -49,16 +49,16 @@ export class UserService {
     if (updateUserDto.access) user.access = updateUserDto.access;
 
     //В Самый низ!!!
-    if (updateUserDto.count > 0) {
-      users.forEach((currUser) => {
-        currUser.count = currUser.count + 1;
-        this.userRepository.save(currUser);
-      });
+    // if (updateUserDto.count > 0) {
+    //   users.forEach((currUser) => {
+    //     currUser.count = currUser.count + 1;
+    //     this.userRepository.save(currUser);
+    //   });
 
-    }
-    if (updateUserDto.count === 0) {
-      user.count = 0;
-    }
+    // }
+    // if (updateUserDto.count === 0) {
+    //   user.count = 0;
+    // }
     return this.userRepository.save(user);
   }
 
