@@ -23,7 +23,7 @@ export class CommentController {
   @UseGuards(JwtGuard)
   @Get()
   findAll(): Promise<Comment[]> {
-    return this.commentService.findAll();
+    return this.commentService.find({});
   }
 
   // @UseGuards(JwtGuard)
@@ -52,7 +52,7 @@ export class CommentController {
 
   @Delete(':id')
   @UseGuards(JwtGuard)
-  remove(@Param('id') id: string, @Req() req: { user: User }) {
-    return this.commentService.remove(+id, req.user.id);
+  remove(@Param('id') id: string) {
+    return this.commentService.remove(+id);
   }
 }

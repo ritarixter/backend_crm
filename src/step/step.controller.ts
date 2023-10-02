@@ -21,7 +21,19 @@ export class StepController {
   @UseGuards(JwtGuard)
   @Get()
   findAll(): Promise<Step[]> {
-    return this.stepService.find();
+    return this.stepService.find({
+      select: {
+        list: {
+          id: true,
+        },
+      },
+      relations: {
+        list: true,
+      },
+      order: {
+        updatedAt: 'DESC',
+      },
+    });
   }
 
   @UseGuards(JwtGuard)
@@ -32,7 +44,13 @@ export class StepController {
 
   @UseGuards(JwtGuard)
   @Patch(':id')
-  update(@Param('id') id: number, @Body() updateListDto: UpdateStepDto) {
-    return this.stepService.update(id, updateListDto);
+  update(@Param('id') id: number, @Body() updateStepDto: UpdateStepDto) {
+    return this.stepService.update(id, updateStepDto);
+  }
+
+  @Delete(':id')
+  @UseGuards(JwtGuard)
+  remove(@Param('id') id: string) {
+    return this.stepService.remove(+id);
   }
 }

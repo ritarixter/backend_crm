@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindOneOptions, Repository } from 'typeorm';
+import { FindManyOptions, FindOneOptions, Repository } from 'typeorm';
 import { Step } from './entities/step.entity';
 import { UpdateStepDto } from './dto/update-step.dto';
 
@@ -10,8 +10,8 @@ export class StepService {
     @InjectRepository(Step) private stepRepository: Repository<Step>,
   ) {}
 
-  async find(): Promise<Step[]> {
-    return this.stepRepository.find();
+  find(query: FindManyOptions<Step>) {
+    return this.stepRepository.find(query);
   }
 
   async update(id: number, updateStepDto: UpdateStepDto) {
@@ -20,6 +20,7 @@ export class StepService {
     });
     if (updateStepDto.idStep === 1) {
       step.createList_step1 = true;
+      
     }
     if (updateStepDto.idStep === 2) {
       step.chooseEngineer_step2 = true;
@@ -72,4 +73,9 @@ export class StepService {
   async findOne(query: FindOneOptions<Step>) {
     return this.stepRepository.findOne(query);
   }
+
+  async remove(id: number) {
+    return this.stepRepository.delete(id);
+  }
 }
+

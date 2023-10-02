@@ -23,7 +23,11 @@ export class UserController {
   @UseGuards(JwtGuard)
   @Get()
   findAll(): Promise<User[]> {
-    return this.userService.findAll();
+    return this.userService.find({
+      order: {
+        createdAt: 'DESC',
+      },
+    });
   }
 
   //Получение данных об пользователе, который щас авторизован
@@ -53,10 +57,10 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
-  // @Patch(':id')
-  // update(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto) {
-  //   return this.userService.update(id, updateUserDto);
-  // }
+  @Patch(':id')
+  update(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto) {
+    return this.userService.update(id, updateUserDto);
+  }
 
   // @Delete(':id')
   // remove(@Param('id') id: number) {

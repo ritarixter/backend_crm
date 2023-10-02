@@ -15,6 +15,8 @@ import { MediaModule } from './media/media.module';
 import { StockModule } from './stock/stock.module';
 import { StepModule } from './step/step.module';
 import { CommentModule } from './comment/comment.module';
+import { WebsocketsModule } from './websockets/websockets.module';
+import { NotifyModule } from './notify/notify.module';
 
 @Module({
   imports: [
@@ -41,7 +43,9 @@ import { CommentModule } from './comment/comment.module';
     MediaModule,
     StockModule,
     StepModule,
-    CommentModule
+    CommentModule,
+    NotifyModule,
+    //WebsocketsModule
   ],
   controllers: [AppController],
   providers: [AppService],
