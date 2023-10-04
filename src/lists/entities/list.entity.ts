@@ -20,28 +20,27 @@ import {
   OneToMany,
 } from 'typeorm';
 
-
 @Entity()
 export class List {
   @PrimaryGeneratedColumn()
-  id?: number;
+  id: number;
 
   @CreateDateColumn()
-  createdAt?: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updatedAt?: Date;
+  updatedAt: Date;
 
   @IsNotEmpty()
   @IsString()
   @Length(2, 60)
-  @Column({default: ""})
+  @Column({ default: '' })
   name: string;
 
   @IsNotEmpty()
   @IsString()
   @Length(2, 120)
-  @Column({default: ""})
+  @Column({ default: '' })
   address: string;
 
   @ManyToOne(() => Company, (company) => company.lists)
@@ -82,13 +81,13 @@ export class List {
   @IsOptional()
   @IsString()
   @Length(2, 20)
-  @Column({ nullable: true })
+  @Column({ default: 'Не назначен' })
   status: string; //Обзятельно!
 
   @IsOptional()
   @IsString()
   @Length(2, 20)
-  @Column({ nullable: true })
+  @Column({ default: 'Не назначена' })
   importance: string; //Обзятельно!
 
   @Column('jsonb', { default: [] })
@@ -97,8 +96,6 @@ export class List {
   @OneToMany(() => Comment, (comment) => comment.list)
   comments?: Comment[];
 
-  @ManyToMany(() => Notify, () => Notify)
-  @JoinTable({ name: 'notify_list' })
+  @OneToMany(() => Notify, (notify) => notify.list)
   notifications: Notify[];
-
 }

@@ -1,7 +1,7 @@
 import { IsString } from "class-validator";
 import { List } from "src/lists/entities/list.entity";
 import { User } from "src/users/entities/user.entity";
-import { Column, CreateDateColumn, Entity, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class Notify {
@@ -14,11 +14,12 @@ export class Notify {
     @UpdateDateColumn()
     updatedAt: Date;
 
-    @ManyToMany(() => User, () => User)
+    @ManyToMany(() => User, (user) => user.notifications)
     users: User[];
 
-    @ManyToMany(() => List, () => List)
-    lists: List[];
+    @ManyToOne(() => List, (list) => list.notifications)
+    @JoinColumn({ name: 'listId' })
+    list: List;
 
     @IsString()
     @Column()

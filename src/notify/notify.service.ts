@@ -2,9 +2,10 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateNotifyDto } from './dto/create-notify.dto';
 import { Notify } from './entities/notify.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindManyOptions, In, Repository } from 'typeorm';
+import { FindManyOptions, FindOneOptions, In, Repository } from 'typeorm';
 import { UserService } from 'src/users/users.service';
 import { ListService } from 'src/lists/list.service';
+import { UpdateNotifyDto } from './dto/update-notify.dto';
 
 @Injectable()
 export class NotifyService {
@@ -41,8 +42,8 @@ export class NotifyService {
     return `This action returns all notify`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} notify`;
+  async findOne(query: FindOneOptions<Notify>) {
+    return this.notifyRepository.findOne(query);
   }
 
   remove(id: number) {
@@ -51,5 +52,14 @@ export class NotifyService {
 
   find(query: FindManyOptions<Notify>) {
     return this.notifyRepository.find(query);
+  }
+
+  async update(id: number, updateNotifytDto: UpdateNotifyDto) {
+    const notify = await this.notifyRepository.findOne({
+      where: { id },
+    });
+    if (updateNotifytDto.isWatched)
+      notify.isWatched = updateNotifytDto.isWatched;
+    return this.notifyRepository.save(notify);
   }
 }

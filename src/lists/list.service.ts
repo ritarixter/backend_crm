@@ -21,8 +21,7 @@ export class ListService {
     private readonly companyService: CompanyService,
     private readonly userService: UserService,
     private readonly worksService: WorkService,
-    private readonly stepService: StepService,
-   // private readonly commentService: CommentService,
+    private readonly stepService: StepService, // private readonly commentService: CommentService,
   ) {}
 
   async update(id: number, updateListDto: UpdateListDto) {
@@ -106,6 +105,14 @@ export class ListService {
     if (access != 'Менеджер') {
       throw new ForbiddenException('Вы не можете создавать заявки');
     } else {
+      const user = await this.userService.findOne({
+        where: { access: 'Главный инженер' },
+      });
+
+      if (!user) {
+        throw new ForbiddenException('Главный инженер не найден');
+      }
+
       const company = await this.companyService.findOne({
         where: { INN: createListDto.INNCompany },
       });
@@ -117,6 +124,7 @@ export class ListService {
         ...createListDto,
         company: { id: company.id },
         step: step,
+        users: [user],
       });
     }
   }

@@ -16,6 +16,7 @@ import { UpdateListDto } from './dto/update-list.dto';
 import { JwtGuard } from 'src/auth/guard/jwt.guard';
 import { User } from 'src/users/entities/user.entity';
 import { DeleteFileDto } from './dto/delete-file.dto';
+import { Not } from 'typeorm';
 
 @Controller('list')
 export class ListController {
@@ -26,7 +27,7 @@ export class ListController {
   findAll(@Req() req: { user: User }): Promise<List[]> {
     if (req.user.access === 'Инженер') {
       return this.listService.find({
-        where: { users: { id: req.user.id } },
+        where: { users: { id: req.user.id }, status: Not('Закончено') },
         relations: {
           company: true,
           commercialProposal: true,
@@ -34,6 +35,7 @@ export class ListController {
           works: true,
           step: true,
           comments: { user: true },
+          notifications: true
         },
         order: {
           createdAt: 'DESC',
@@ -43,6 +45,7 @@ export class ListController {
       });
     } else if (req.user.access === 'Менеджер') {
       return this.listService.find({
+        where: { status: Not('Закончено') },
         select: {
           id: true,
           name: true,
@@ -63,6 +66,7 @@ export class ListController {
           company: true,
           step: true,
           comments: { user: true },
+          notifications: true
         },
         order: {
           createdAt: 'DESC',
@@ -72,6 +76,7 @@ export class ListController {
       });
     } else {
       return this.listService.find({
+        where: { status: Not('Закончено') },
         relations: {
           company: true,
           commercialProposal: true,
@@ -79,6 +84,7 @@ export class ListController {
           works: true,
           step: true,
           comments: { user: true },
+          notifications: true
         },
         order: {
           createdAt: 'DESC',

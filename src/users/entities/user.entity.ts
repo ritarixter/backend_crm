@@ -82,10 +82,9 @@ export class User {
   @ManyToMany(() => List, () => List)
   list: List[];
 
-  @ManyToMany(() => Notify, () => Notify)
+  @ManyToMany(() => Notify, (notify) => notify.users)
   @JoinTable({ name: 'notify_users' })
   notifications: Notify[];
-
 
   @OneToMany(() => Comment, (comment) => comment.list)
   comments?: Comment[];

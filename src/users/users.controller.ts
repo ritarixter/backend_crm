@@ -27,6 +27,7 @@ export class UserController {
       order: {
         createdAt: 'DESC',
       },
+      relations: { notifications: true}
     });
   }
 
