@@ -33,6 +33,9 @@ export class ListService {
     });
     if (updateListDto.name) list.name = updateListDto.name;
     if (updateListDto.endDate) list.endDate = updateListDto.endDate;
+    if (updateListDto.endDateForInspection) list.endDateForInspection = updateListDto.endDateForInspection;
+    if (updateListDto.endDateForFitters) list.endDateForFitters = updateListDto.endDateForFitters;
+    if (updateListDto.endDateForCP) list.endDateForCP = updateListDto.endDateForCP;
     if (updateListDto.customer) list.customer = updateListDto.customer;
     if (updateListDto.importance) list.importance = updateListDto.importance;
     if (updateListDto.status) list.status = updateListDto.status;

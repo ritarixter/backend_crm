@@ -16,6 +16,7 @@ export class Step {
   createList_step1: boolean;
 
   @Column({ default: false })
+
   chooseEngineer_step2: boolean; //Выбор инженера и обследование c проектировщиком
 
   @Column({ default: false })
@@ -25,7 +26,7 @@ export class Step {
   ChooseFitter_step3_1: boolean; //выбор монтажников
 
   @Column({ default: false })
-  editCPbyBuyer_step4: boolean; //проставление цен закупщиком
+  editCPbyBuyer_step4: boolean; //проставление цены закупщиком
 
   @Column({ default: false })
   checkCPbySuperEngineer_step5: boolean; //Проверка кп Главным инженером и отправка Аксиньи

@@ -64,8 +64,20 @@ export class List {
   // description?: string;
 
   @IsOptional()
-  @Column({ type: 'timestamptz', nullable: true })
-  endDate: Date;
+  @Column({ nullable: true })
+  endDate: string; //ФОРМАТ 2023-10-14 , ДЛЯ Input type="date"
+
+  @IsOptional()
+  @Column({ nullable: true })
+  endDateForCP: string; //ФОРМАТ 2023-10-14 , ДЛЯ Input type="date" //ДЛЯ КП
+
+  @IsOptional()
+  @Column({ nullable: true })
+  endDateForInspection: string; //ФОРМАТ 2023-10-14 , ДЛЯ Input type="date" //ДЛЯ ОБСЛЕДОВАНИЯ
+
+  @IsOptional()
+  @Column({ nullable: true })
+  endDateForFitters: string; //ФОРМАТ 2023-10-14 , ДЛЯ Input type="date" //ДЛЯ ОБСЛЕДОВАНИЯ
 
   @OneToOne(
     () => CommercialProposal,

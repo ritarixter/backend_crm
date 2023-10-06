@@ -1,8 +1,6 @@
 import { IsNotEmpty, IsOptional, IsString, Length } from 'class-validator';
 import { CommercialProposal } from 'src/commercial-proposal/entities/commercial-proposal.entity';
-import { Company } from 'src/company/entities/company.entity';
-import { User } from 'src/users/entities/user.entity';
-import { Work } from 'src/work/entities/work.entity';
+
 
 export class UpdateListDto {
   @IsOptional()
@@ -21,7 +19,13 @@ export class UpdateListDto {
   @IsNotEmpty()
   @IsString()
   @Length(2, 20)
-  endDate: Date;
+  endDate?: string;
+
+  endDateForCP?: string;
+
+  endDateForInspection?: string;
+
+  endDateForFitters?:string;
 
   @IsOptional()
   @IsNotEmpty()
