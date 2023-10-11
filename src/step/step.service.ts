@@ -20,48 +20,70 @@ export class StepService {
     });
     if (updateStepDto.idStep === 1) {
       step.createList_step1 = true;
-      
     }
     if (updateStepDto.idStep === 2) {
       step.chooseEngineer_step2 = true;
     }
     if (updateStepDto.idStep === 3) {
-      step.createCP_step3 = true;
-    }
-
-    if (updateStepDto.idStep === 3.1) {
-      step.ChooseFitter_step3_1 = true;
+      step.photoSurvey_step3 = true;
     }
 
     if (updateStepDto.idStep === 4) {
-      step.editCPbyBuyer_step4 = true;
+      step.checkingPhotoSurvey_step4 = true;
     }
+
     if (updateStepDto.idStep === 5) {
-      step.checkCPbySuperEngineer_step5 = true;
-      step.returnToBuyer_step5_1 = false;
-    }
-    if (updateStepDto.idStep === 5.1) {
-      step.returnToBuyer_step5_1 = true;
-      step.editCPbyBuyer_step4 = false;
-      step.checkCPbySuperEngineer_step5 = false;
+      step.createCP_step5 = true;
     }
     if (updateStepDto.idStep === 6) {
-      step.calcMarginality_step6 = true;
-      step.returnCPforSuperEngineer_step7 = false;
+      step.updateCP_step6 = true;
     }
     if (updateStepDto.idStep === 7) {
-      step.checkCPbySuperEngineer_step5 = false;
-      step.calcMarginality_step6 = false;
-      step.returnCPforSuperEngineer_step7 = true;
+      step.checkingCP_step7 = true;
+    }
+    if (updateStepDto.idStep === 7.1) {
+      step.sendToBuyer_step7_1 = true;
+      step.updateCP_step6 = false;
     }
     if (updateStepDto.idStep === 8) {
-      step.agreementСonclusion_step8 = true;
+      step.calcMarginality_step8 = true;
+    }
+    if (updateStepDto.idStep === 8.1) {
+      step.returnCPforSuperEngineer_step8_1 = true;
+      step.checkingCP_step7 = false;
     }
     if (updateStepDto.idStep === 9) {
-      step.workFitter_step9 = true;
+      step.approvalCP_step9 = true;
     }
     if (updateStepDto.idStep === 10) {
-      step.closeList_step10 = true;
+      step.agreementСonclusion_step10 = true;
+    }
+    if (updateStepDto.idStep === 11) {
+      step.editCPbyBuyer_step11 = true;
+    }
+    if (updateStepDto.idStep === 12) {
+      step.setsDeadline_step12 = true;
+    }
+    if (updateStepDto.idStep === 13) {
+      step.plannerUploadsFiles_step13 = true;
+    }
+    if (updateStepDto.idStep === 14) {
+      step.workFitter_step14 = true;
+    }
+    if (updateStepDto.idStep === 15) {
+      step.checkWorkFitter_step15 = true;
+    }
+    if (updateStepDto.idStep === 16) {
+      step.WorkCertificate_step16 = true;
+    }
+    if (updateStepDto.idStep === 17) {
+      step.SignTheAct_step17 = true;
+    }
+    if (updateStepDto.idStep === 18) {
+      step.LawyerBill_step18 = true;
+    }
+    if (updateStepDto.idStep === 19) {
+      step.closeList_step19 = true;
     }
     return this.stepRepository.save(step);
   }
@@ -78,4 +100,3 @@ export class StepService {
     return this.stepRepository.delete(id);
   }
 }
-
