@@ -96,6 +96,27 @@ export class ListController {
   }
 
   @UseGuards(JwtGuard)
+  @Get('/history')
+  findAllHistory(): Promise<List[]> {
+    return this.listService.find({
+      where: { status: 'Закончено' },
+      relations: {
+        company: true,
+        commercialProposal: true,
+        users: true,
+        works: true,
+        step: true,
+        comments: { user: true },
+        notifications: true
+      },
+      order: {
+        createdAt: 'DESC',
+        comments: { createdAt: 'DESC' },
+      },
+    });
+  }
+
+  @UseGuards(JwtGuard)
   @Get(':id')
   findOne(@Param('id') id: number, @Req() req: { user: User }) {
     if (req.user.access === 'Менеджер') {
