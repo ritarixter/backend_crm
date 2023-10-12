@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import * as moment from 'moment';
 import 'moment-timezone';
 import * as dotenv from 'dotenv';
+import { URL_FRONTEND } from './utils/constants';
 dotenv.config();
 
 async function bootstrap() {
@@ -14,7 +15,7 @@ async function bootstrap() {
   app.use(helmet());
   app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
   app.enableCors({
-    origin: [process.env.URL_FRONTEND],
+    origin: [URL_FRONTEND],
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT'],
     credentials: true,
   });
