@@ -174,6 +174,7 @@ export class ListController {
       },
       relations: {
         commercialProposal: true,
+        step: true
       },
     });
   }
