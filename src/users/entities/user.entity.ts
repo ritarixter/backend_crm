@@ -25,7 +25,7 @@ import { Notify } from 'src/notify/entities/notify.entity';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  id?: number;
+  id: number;
 
   @CreateDateColumn()
   createdAt?: Date;
