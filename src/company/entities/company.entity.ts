@@ -1,4 +1,10 @@
-import { IsNotEmpty, IsNumber, IsOptional, IsString, Length } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Length,
+} from 'class-validator';
 import { CommercialProposal } from 'src/commercial-proposal/entities/commercial-proposal.entity';
 import { List } from 'src/lists/entities/list.entity';
 import {
@@ -49,5 +55,4 @@ export class Company {
 
   @OneToMany(() => List, (list) => list.company)
   lists?: List[];
-
 }

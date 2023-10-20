@@ -1,9 +1,4 @@
-import {
-  IsString,
-  Length,
-  IsOptional,
-  IsEmail,
-} from 'class-validator';
+import { IsString, Length, IsOptional, IsEmail } from 'class-validator';
 
 export class CreateCompanyDto {
   @IsString()
@@ -14,11 +9,11 @@ export class CreateCompanyDto {
   @Length(2, 50)
   name: string; //ФИО контактного лица компании
 
-  @Length(10)
+  @Length(10, 20)
   @IsString()
   INN: string; //ИНН Компании
 
-  @Length(3, 15)
+  @Length(3, 20)
   @IsString()
   numberPhone: string;
 
