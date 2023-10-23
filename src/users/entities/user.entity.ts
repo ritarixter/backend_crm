@@ -46,7 +46,7 @@ export class User {
 
   @IsOptional()
   @IsString()
-  @Column()
+  @Column({default:'/'})
   avatar: string;
 
   @IsNotEmpty()
