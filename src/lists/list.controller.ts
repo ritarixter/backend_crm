@@ -35,7 +35,7 @@ export class ListController {
           works: true,
           step: true,
           comments: { user: true },
-          notifications: true
+          notifications: true,
         },
         order: {
           createdAt: 'DESC',
@@ -66,7 +66,7 @@ export class ListController {
           company: true,
           step: true,
           comments: { user: true },
-          notifications: true
+          notifications: true,
         },
         order: {
           createdAt: 'DESC',
@@ -84,7 +84,7 @@ export class ListController {
           works: true,
           step: true,
           comments: { user: true },
-          notifications: true
+          notifications: true,
         },
         order: {
           createdAt: 'DESC',
@@ -107,7 +107,7 @@ export class ListController {
         works: true,
         step: true,
         comments: { user: true },
-        notifications: true
+        notifications: true,
       },
       order: {
         createdAt: 'DESC',
@@ -174,7 +174,7 @@ export class ListController {
       },
       relations: {
         commercialProposal: true,
-        step: true
+        step: true,
       },
     });
   }

@@ -21,13 +21,13 @@ export class PlanController {
 
   @UseGuards(JwtGuard)
   @Post()
- async create(@Body() createPlanDto: CreatePlanDto) {
+  async create(@Body() createPlanDto: CreatePlanDto) {
     return this.planService.create(createPlanDto);
   }
 
   @UseGuards(JwtGuard)
   @Get()
-  findAll():Promise<Plan[]>{
+  findAll(): Promise<Plan[]> {
     return this.planService.find({
       relations: {
         works: true,

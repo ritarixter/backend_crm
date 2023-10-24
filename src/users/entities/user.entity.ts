@@ -88,5 +88,4 @@ export class User {
 
   @OneToMany(() => Comment, (comment) => comment.list)
   comments?: Comment[];
-
 }

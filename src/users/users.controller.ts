@@ -1,9 +1,7 @@
 import {
   Body,
   Controller,
-  Delete,
   Get,
-  NotFoundException,
   Param,
   Patch,
   Post,
@@ -27,7 +25,7 @@ export class UserController {
       order: {
         createdAt: 'DESC',
       },
-      relations: { notifications: true}
+      relations: { notifications: true },
     });
   }
 
@@ -46,7 +44,7 @@ export class UserController {
     });
   }
 
-  @Get(':id')
+  @Get('/current/:id')
   findOne(@Param('id') id: number) {
     return this.userService.findOne({
       where: { id },
