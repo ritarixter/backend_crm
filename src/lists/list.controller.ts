@@ -25,25 +25,25 @@ export class ListController {
   @UseGuards(JwtGuard)
   @Get()
   findAll(@Req() req: { user: User }): Promise<List[]> {
-    if (req.user.access === 'Инженер') {
-      return this.listService.find({
-        where: { users: { id: req.user.id }, status: Not('Закончено') },
-        relations: {
-          company: true,
-          commercialProposal: true,
-          users: true,
-          works: true,
-          step: true,
-          comments: { user: true },
-          notifications: true,
-        },
-        order: {
-          createdAt: 'DESC',
-          //endDate: "ASC"
-          comments: { createdAt: 'DESC' },
-        },
-      });
-    } else if (req.user.access === 'Менеджер') {
+    // if (req.user.access === 'Инженер') {
+    //   return this.listService.find({
+    //     where: { users: { id: req.user.id }, status: Not('Закончено') },
+
+    //     relations: {
+    //       company: true,
+    //       commercialProposal: true,
+    //       users: true,
+    //       works: true,
+    //       step: true,
+    //       comments: { user: true },
+    //       notifications: true,
+    //     },
+    //     order: {
+    //       createdAt: 'DESC',
+    //       comments: { createdAt: 'DESC' },
+    //     },
+    //   });
+if (req.user.access === 'Менеджер') {
       return this.listService.find({
         where: { status: Not('Закончено') },
         select: {
