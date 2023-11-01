@@ -8,14 +8,15 @@ export class CreateListDto {
 
   @IsNotEmpty()
   @IsString()
+  @Length(2, 60)
   customer: string; //'компания' или фио менеджера кормленый
 
   @IsOptional()
   @IsString()
+  @Length(0, 500)
   description?: string;
 
   @IsString()
-  @Length(10)
   INNCompany: string;
 
   files?: object[];

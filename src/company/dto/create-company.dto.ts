@@ -9,12 +9,12 @@ export class CreateCompanyDto {
   @Length(2, 50)
   name: string; //ФИО контактного лица компании
 
-  @Length(10, 20)
   @IsString()
+  @Length(10, 12)
   INN: string; //ИНН Компании
 
-  @Length(3, 20)
   @IsString()
+  @Length(3, 20)
   numberPhone: string;
 
   @IsOptional()

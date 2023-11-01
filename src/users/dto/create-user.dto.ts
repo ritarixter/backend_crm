@@ -13,19 +13,20 @@ export class CreateUserDto {
   username: string;
 
   @IsNotEmpty()
-  @MinLength(2)
   @IsString()
+  @Length(2, 30)
   password: string;
 
   @IsNotEmpty()
   @IsString()
-  @Length(2, 40)
+  @Length(2, 60)
   name: string;
 
   @IsOptional()
   avatar?: string;
 
-  @IsOptional()
+  @IsString()
+  @Length(3, 20)
   phone: string;
 
   @IsNotEmpty()

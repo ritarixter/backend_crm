@@ -8,15 +8,17 @@ export class UpdateCompanyDto {
 
   @IsOptional()
   @IsString()
+  @Length(2, 50)
   name?: string; //ФИО контактного лица компании
 
   @IsOptional()
-  @Length(10)
   @IsString()
+  @Length(10, 12)
   INN?: string; //ИНН Компании
 
   @IsOptional()
   @IsString()
+  @Length(3, 20)
   numberPhone?: string;
 
   @IsOptional()

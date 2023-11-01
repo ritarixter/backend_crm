@@ -18,7 +18,7 @@ export class UpdateListDto {
   @IsOptional()
   @IsNotEmpty()
   @IsString()
-  @Length(2, 20)
+  @Length(2, 50)
   endDate?: string;
 
   endDateForCP?: string;
@@ -46,6 +46,7 @@ export class UpdateListDto {
 
   @IsOptional()
   @IsString()
+  @Length(0, 500)
   description?: string;
 
   @IsOptional()
